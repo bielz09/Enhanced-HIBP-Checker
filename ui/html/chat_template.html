@@ -1,0 +1,95 @@
+<!-- 
+  This HTML file provides the basic structure and styling for the AI Advisor chat interface.
+  It is loaded into a QWebEngineView in the PyQt6 application.
+  Messages are dynamically added to the 'message-container' div by JavaScript (chat_logic.js).
+  Includes DOMPurify for potential HTML sanitization, though current AI output is plain text.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.5/purify.min.js"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+            font-size: 10pt;
+            background-color: #2b2b2b;
+            color: #ffffff;
+            margin: 0;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .message-container {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            margin-bottom: 8px;
+            max-width: 75%;
+            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: #0078d7; /* Primary button color */
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .ai-message {
+            background-color: #3c3c3c;
+            color: white;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+            white-space: pre-line; /* Preserve newlines */
+        }
+        
+        .ai-message h1, .ai-message h2, .ai-message h3 {
+            margin-top: 0.5em;
+            margin-bottom: 0.2em;
+        }
+        .ai-message p {
+            margin-top: 0.2em;
+            margin-bottom: 0.2em;
+        }
+
+
+        .system-message {
+            font-style: italic;
+            color: #aaa;
+            text-align: center;
+            font-size: 0.9em;
+            padding: 5px 0;
+        }
+        
+        /* Disable text selection highlight universally */
+        ::selection {
+            background: transparent;
+        }
+
+        /* MODIFIED CSS RULE */
+        .thinking-indicator {
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+    </style>
+</head>
+<body>
+    <div id="message-container" class="message-container">
+        <!-- Messages will be appended here -->
+    </div>
+
+    <script src="chat_logic.js" defer></script>
+</body>
+</html>
